@@ -1,0 +1,15 @@
+opencv 2.4.11
+0.程序需要两个摄像头/dev/video0和/dev/video1，两个都要对准棋盘，必须保证棋盘全部在摄像头的视野中
+1.程序文件的位置禁止移动，里面是用相对路径的，压缩包解压到制定位置即可
+2.程序分为两个部分，一个是初始化ChessInit，一个是运行ChessRun
+4.代码为Linux版本，编译命令为
+	g++ ChessInit.cpp -o ChessInit.o `pkg-config --cflags --libs opencv`
+	g++ ChessRun.cpp -o ChessRun.o `pkg-config --cflags --libs opencv`
+运行命令为
+	./ChessInit.o
+	./ChessRun.o
+5.初始化之后得到一个ChessPoint.txt文件，记录的是棋盘点的状态和棋盘点在照片上的位置，因此在使用过程中摄像头和棋盘坚决不能动，同时在cam文件夹下得到图片left0.jpg,right0.jpg
+6.ChessInit程序每运行一次都会拍照存储在cam下，名称为left.jpg和right.jpg；修改ChessPoint.txt文件，修改其中的点的状态；并且输出文件next.txt，其中格式为
+	char int int	如 c x y
+字符为e表示检测到异常变化，即发现棋盘变化的情况不是玩家落了一个子；t表示玩家胜利；f表示在机器走了第(x,y)后胜利；c表示游戏未分出输赢，下一步(x,y)
+7.程序包含返回值，拥有不同的意义，参见程序注释
