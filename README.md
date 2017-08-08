@@ -1,4 +1,4 @@
-# chess playing robot
+# five-in-row playing robot
 
 Arduino controls mechanical arm and wheels. It receives commands from RaspPi.
 
